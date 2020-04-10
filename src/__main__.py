@@ -2,14 +2,14 @@ import pygame
 
 from random import random
 
-circles = []
+people = []
 
 CIRCLE_SIZE = 5
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
 
-class Circle(object):
+class Person(object):
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -22,21 +22,21 @@ class Circle(object):
             self.yvel = random() - 0.5
 
 
-def init_circles(count):
+def init_people(count):
     for c in range(count):
-        circles.append(Circle(random() * WINDOW_WIDTH, random() * WINDOW_HEIGHT))
+        people.append(Person(random() * WINDOW_WIDTH, random() * WINDOW_HEIGHT))
 
 
-def update_circles():
-    for circle in circles:
-        circle.x += circle.xvel
-        circle.y += circle.yvel
+def update_people():
+    for person in people:
+        person.x += person.xvel
+        person.y += person.yvel
 
-        if (circle.x < 0) or (circle.x > WINDOW_WIDTH):
-            circle.xvel = -circle.xvel
+        if (person.x < 0) or (person.x > WINDOW_WIDTH):
+            person.xvel = -person.xvel
 
-        if (circle.y < 0) or (circle.y > WINDOW_HEIGHT):
-            circle.yvel = -circle.yvel
+        if (person.y < 0) or (person.y > WINDOW_HEIGHT):
+            person.yvel = -person.yvel
 
 
 def main():
@@ -48,7 +48,7 @@ def main():
     # Run until the user asks to quit
     running = True
 
-    init_circles(20)
+    init_people(200)
 
     while running:
         # Did the user click the window close button?
@@ -59,12 +59,12 @@ def main():
         # Fill the background with white
         screen.fill((255, 255, 255))
 
-        update_circles()
+        update_people()
 
-        for circle in circles:
+        for person in people:
             # Draw a solid blue circle
             pygame.draw.circle(
-                screen, (0, 0, 255), (int(circle.x), int(circle.y)), CIRCLE_SIZE
+                screen, (0, 0, 255), (int(person.x), int(person.y)), CIRCLE_SIZE
             )
 
         # Flip the display
