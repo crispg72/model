@@ -1,5 +1,22 @@
 import pygame
 
+from random import randint
+
+circles = []
+
+CIRCLE_SIZE = 5
+
+
+class Circle(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
+def init_circles(count):
+    for c in range(count):
+        circles.append(Circle(randint(10, 750), randint(10, 550)))
+
 
 def main():
     pygame.init()
@@ -10,6 +27,8 @@ def main():
     # Run until the user asks to quit
     running = True
 
+    init_circles(20)
+
     while running:
         # Did the user click the window close button?
         for event in pygame.event.get():
@@ -19,8 +38,9 @@ def main():
         # Fill the background with white
         screen.fill((255, 255, 255))
 
-        # Draw a solid blue circle in the center
-        pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
+        for circle in circles:
+            # Draw a solid blue circle
+            pygame.draw.circle(screen, (0, 0, 255), (circle.x, circle.y), CIRCLE_SIZE)
 
         # Flip the display
         pygame.display.flip()
