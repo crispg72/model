@@ -1,6 +1,6 @@
 import pygame
 
-from random import randint
+from random import random
 
 circles = []
 
@@ -14,13 +14,17 @@ class Circle(object):
         self.x = x
         self.y = y
 
-        self.xvel = randint(-1, 1)
-        self.yvel = randint(-1, 1)
+        self.xvel = 0.0
+        while self.xvel == 0.0:
+            self.xvel = random() - 0.5
+        self.yvel = 0.0
+        while self.yvel == 0.0:
+            self.yvel = random() - 0.5
 
 
 def init_circles(count):
     for c in range(count):
-        circles.append(Circle(randint(10, 750), randint(10, 550)))
+        circles.append(Circle(random() * WINDOW_WIDTH, random() * WINDOW_HEIGHT))
 
 
 def update_circles():
@@ -59,7 +63,9 @@ def main():
 
         for circle in circles:
             # Draw a solid blue circle
-            pygame.draw.circle(screen, (0, 0, 255), (circle.x, circle.y), CIRCLE_SIZE)
+            pygame.draw.circle(
+                screen, (0, 0, 255), (int(circle.x), int(circle.y)), CIRCLE_SIZE
+            )
 
         # Flip the display
         pygame.display.flip()
