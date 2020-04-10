@@ -12,10 +12,19 @@ class Circle(object):
         self.x = x
         self.y = y
 
+        self.xvel = randint(-1, 1)
+        self.yvel = randint(-1, 1)
+
 
 def init_circles(count):
     for c in range(count):
         circles.append(Circle(randint(10, 750), randint(10, 550)))
+
+
+def update_circles():
+    for circle in circles:
+        circle.x += circle.xvel
+        circle.y += circle.yvel
 
 
 def main():
@@ -37,6 +46,8 @@ def main():
 
         # Fill the background with white
         screen.fill((255, 255, 255))
+
+        update_circles()
 
         for circle in circles:
             # Draw a solid blue circle
