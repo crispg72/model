@@ -7,6 +7,8 @@ infected_people = []
 recovered_people = []
 
 CIRCLE_SIZE = 5
+SPEED_SCALE = 1.5
+
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
@@ -25,10 +27,10 @@ class Person(object):
 
         self.xvel = 0.0
         while self.xvel == 0.0:
-            self.xvel = random() - 0.5
+            self.xvel = (random() - 0.5) * SPEED_SCALE
         self.yvel = 0.0
         while self.yvel == 0.0:
-            self.yvel = random() - 0.5
+            self.yvel = (random() - 0.5) * SPEED_SCALE
 
         self.count = 0
         self.status = SUSCEPTIBLE
@@ -95,7 +97,7 @@ def main():
     # Run until the user asks to quit
     running = True
 
-    init_people(20)
+    init_people(50)
 
     # Start with one infection
     infected_people.append(susceptible_people.pop())
@@ -123,6 +125,7 @@ def main():
 
         # Flip the display
         pygame.display.flip()
+        pygame.time.Clock().tick(60)
 
     # Done! Time to quit.
     pygame.quit()
