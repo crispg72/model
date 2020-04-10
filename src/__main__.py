@@ -5,6 +5,8 @@ from random import randint
 circles = []
 
 CIRCLE_SIZE = 5
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
 
 
 class Circle(object):
@@ -26,12 +28,18 @@ def update_circles():
         circle.x += circle.xvel
         circle.y += circle.yvel
 
+        if (circle.x < 0) or (circle.x > WINDOW_WIDTH):
+            circle.xvel = -circle.xvel
+
+        if (circle.y < 0) or (circle.y > WINDOW_HEIGHT):
+            circle.yvel = -circle.yvel
+
 
 def main():
     pygame.init()
 
     # Set up the drawing window
-    screen = pygame.display.set_mode([800, 600])
+    screen = pygame.display.set_mode([WINDOW_WIDTH, WINDOW_HEIGHT])
 
     # Run until the user asks to quit
     running = True
